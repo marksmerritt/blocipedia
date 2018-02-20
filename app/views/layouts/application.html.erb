@@ -36,7 +36,7 @@
             <% if current_user.standard? %>
               <%= link_to "Upgrade", new_charge_path, class: "btn btn-primary" %>
             <% elsif current_user.premium? %>
-              <%= link_to "Downgrade", downgrade_path, class: "btn btn-danger", method: :put %>
+              <%= link_to "Downgrade", downgrade_path, class: "btn btn-danger", method: :put, data: { confirm: "All of your private wikis will become public. Are you sure you want to continute?" } %>
             <% end %>
           <% else %>
             <%= link_to "Sign In", new_user_session_path %> or
