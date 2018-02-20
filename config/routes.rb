@@ -6,6 +6,6 @@ Rails.application.routes.draw do
   resources :wikis
   resources :charges, only: [:new, :create]
 
-  get 'downgrade', to: "users#downgrade"
+  put 'downgrade', to: "users#downgrade"
 
 end
