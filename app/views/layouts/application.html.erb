@@ -34,7 +34,9 @@
           <% if current_user %>
             Hey <%= current_user.email %>! <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
             <% if current_user.standard? %>
-              <%= link_to "Upgrade", new_charges_path, class: "btn btn-primary" %>
+              <%= link_to "Upgrade", new_charge_path, class: "btn btn-primary" %>
+            <% elsif current_user.premium? %>
+              <%= link_to "Downgrade", downgrade_path, class: "btn btn-danger" %>
             <% end %>
           <% else %>
             <%= link_to "Sign In", new_user_session_path %> or

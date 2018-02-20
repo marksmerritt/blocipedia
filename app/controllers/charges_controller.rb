@@ -1,7 +1,6 @@
 class ChargesController < ApplicationController
 
   def new
-    authorize Charge
     @stripe_btn_data = {
       key: "#{ Rails.configuration.stripe[:publishable_key] }",
       description: "BigMoney Membership - #{current_user.name}",
@@ -10,7 +9,6 @@ class ChargesController < ApplicationController
   end
 
   def create
-    authorize Charge
     customer = Stripe::Customer.create(
       email: current_user.email,
       card: params[:stripeToken]

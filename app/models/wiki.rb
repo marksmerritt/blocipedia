@@ -7,6 +7,6 @@ class Wiki < ApplicationRecord
   private
 
   def set_default_attributes
-    self.private ||= false
+    private ||= false
   end
 end
