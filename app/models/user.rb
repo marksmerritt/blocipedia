@@ -1,8 +1,10 @@
 class User < ApplicationRecord
-  after_initialize :set_defaults
+  after_initialize :set_default_attributes
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
+
+  has_many :wikis
 
   def admin?
     role == "admin"
@@ -18,7 +20,7 @@ class User < ApplicationRecord
 
   private 
 
-  def set_defaults
+  def set_default_attributes
     self.role ||= "standard" 
   end
 end
