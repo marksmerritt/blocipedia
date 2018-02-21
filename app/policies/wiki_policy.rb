@@ -1,20 +1,26 @@
 class WikiPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      wikis_to_return = []
-      if user.nil? || user.standard?
-        wikis_to_return = scope.where(private: false)
-      elsif user.admin? 
-        wikis_to_return = scope.all
-      else 
-        all_wikis = scope.all
+      wikis = []
+      if user.role == "admin"
+        wikis = scope.all
+      elsif user.role == "premium"
+        all_wikis = scope.all 
         all_wikis.each do |wiki|
-          if wiki.private == false || wiki.user == user
-            wikis_to_return << wiki
+          if wiki.public? || wiki.user == user || wiki.users.include?(user)
+            wikis << wiki
+          end
+        end
+      else
+        all_wikis = scope.all 
+        wikis = []
+        all_wikis.each do |wiki|
+          if !wiki.private? || wiki.users.include?(user)
+            wikis << wiki
           end
         end
       end
-      wikis_to_return
+      wikis
     end
   end
 end

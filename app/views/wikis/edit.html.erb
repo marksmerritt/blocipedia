@@ -1,5 +1,8 @@
 <h1>Edit Wiki</h1>
- 
+<% if @wiki.user == current_user || current_user.admin? %>
+  <%= link_to "Add Collaborators", new_wiki_collaborator_path(@wiki), class: "btn btn-primary"  %>
+<% end %>
+
 <div class="row">
   <div class="col-md-8">
     <%= render partial: 'form', locals: { wiki: @wiki } %>
