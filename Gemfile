@@ -42,6 +42,8 @@ gem 'devise'
 gem 'pundit'
 gem 'stripe'
 gem 'redcarpet'
+gem 'searchkick'
+gem 'jquery-ui-rails'
 
 
 

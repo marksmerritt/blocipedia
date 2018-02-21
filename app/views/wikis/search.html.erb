@@ -1,0 +1,6 @@
+<h3>Results</h3>
+<% if @wikis.suggestions.any? %>
+  Did you mean <strong><%= @wikis.suggestions.first %></strong>?
+<% end %>
+<%= render partial: 'search' %>
+<%= render @wikis %>

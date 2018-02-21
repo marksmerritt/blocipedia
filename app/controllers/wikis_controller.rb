@@ -1,7 +1,6 @@
 class WikisController < ApplicationController
   def index
-    @wikis = policy_scope(Wiki) 
-    
+    @wikis = policy_scope(Wiki)
   end
 
   def show
@@ -56,6 +55,15 @@ class WikisController < ApplicationController
       flash[:error] = "Please try again."
       render :show
     end
+  end
+
+  def search
+    query = params[:w].presence || "*"
+    @wikis = Wiki.search(query, fields: [:title], suggest: true)
+  end
+
+  def autocomplete
+    render json: Wiki.search(params[:term], fields: [{title: :text_start}], limit: 10).map(&:title)
   end
 
   private

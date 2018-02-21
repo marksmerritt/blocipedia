@@ -7,6 +7,8 @@ class Wiki < ApplicationRecord
 
   default_scope { order(created_at: :desc) }
 
+  searchkick text_start: [:title], suggest: [:title]
+
   private
 
   def set_default_attributes
